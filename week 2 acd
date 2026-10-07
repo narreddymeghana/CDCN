@@ -1,0 +1,82 @@
+WEEK 2
+wsl --install -d Ubuntu
+Enter new UNIX username:
+New password:
+sudo apt update
+[sudo] password for student:
+sudo apt install flex gcc vim -y
+flex --version
+gcc --version
+vi --version
+mkdir week2
+cd week2
+vi lexer.l
+i
+cntr+shft+v
+esc
+:wq
+press enter
+lsc
+lex lexer.l
+ls
+gcc lex.yy.c -ll
+ls
+./a.out
+paste code
+contrl + d
+
+
+%{
+#include <stdio.h>
+%}
+
+%%
+
+"if"        { printf("KEYWORD : if\n"); }
+"else"      { printf("KEYWORD : else\n"); }
+"while"     { printf("KEYWORD : while\n"); }
+"for"       { printf("KEYWORD : for\n"); }
+"int"       { printf("KEYWORD : int\n"); }
+"float"     { printf("KEYWORD : float\n"); }
+"char"      { printf("KEYWORD : char\n"); }
+"return"    { printf("KEYWORD : return\n"); }
+
+[0-9]+      { printf("NUMBER : %s\n", yytext); }
+
+[a-zA-Z_][a-zA-Z0-9_]* {
+    printf("IDENTIFIER : %s\n", yytext);
+}
+
+"=="        { printf("OPERATOR : ==\n"); }
+"!="        { printf("OPERATOR : !=\n"); }
+"<="        { printf("OPERATOR : <=\n"); }
+">="        { printf("OPERATOR : >=\n"); }
+"="         { printf("OPERATOR : =\n"); }
+"+"         { printf("OPERATOR : +\n"); }
+"-"         { printf("OPERATOR : -\n"); }
+"*"         { printf("OPERATOR : *\n"); }
+"/"         { printf("OPERATOR : /\n"); }
+"<"         { printf("OPERATOR : <\n"); }
+">"         { printf("OPERATOR : >\n"); }
+
+"("         { printf("SPECIAL SYMBOL : (\n"); }
+")"         { printf("SPECIAL SYMBOL : )\n"); }
+"{"         { printf("SPECIAL SYMBOL : {\n"); }
+"}"         { printf("SPECIAL SYMBOL : }\n"); }
+";"         { printf("SPECIAL SYMBOL : ;\n"); }
+","         { printf("SPECIAL SYMBOL : ,\n"); }
+
+"//".*      { /* Ignore single-line comments */ }
+
+[ \t\n]+    { /* Ignore spaces, tabs and newlines */ }
+
+.           { printf("UNKNOWN : %s\n", yytext); }
+
+%%
+
+int main()
+{
+    printf("Enter the input:\n");
+    yylex();
+    return 0;
+}
